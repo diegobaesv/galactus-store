@@ -19,6 +19,12 @@ public class CarritoServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		/*
+		 - obtener todos los datos de venta detalle filtrado por cookie y mandarlos hacia la vista 
+		 * */
+		
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/carrito.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -33,6 +39,13 @@ public class CarritoServlet extends HttpServlet {
 		for (Cookie cookie : cookies) {
 			System.out.println("cookie: "+cookie.getName()+ " - " + cookie.getValue());
 		}
+		
+		/*
+		 - capturar en un Sring el cookie de JSESSIONID con clase Util que recibe parametro Cookies[]
+		 - buscar en la tabla ventas si ya existe ese cookie como codigoInterno
+		 - si no existe, creo el reigstro en la tabla ventas
+		 - agrego el producto, a la tabla venta_detalle ( pendiente conteo de cantidad )	 
+		 * */
 		
 		response.getWriter().append("OK");
 		
