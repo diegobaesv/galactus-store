@@ -43,7 +43,8 @@
 						<span class="text-center font-bold text-gray-600 text-xs"><%= producto.getNombre() %></span>
 						<span class="w-full text-red-500 text-left text-xs"><%= producto.getStock() %> unidades</span>
 						
-						<button class="bg-orange-600 w-full text-white font-medium hover:bg-orange-700 p-1 rounded cursor-pointer">+ Agregar Carrito</button>
+						<button class="bg-orange-600 w-full text-white font-medium hover:bg-orange-700 p-1 rounded cursor-pointer" 
+							onclick="agregarCarrito(<%= producto.getIdProducto()  %>)">+ Agregar Carrito</button>
 						
 					</a>
 				<% 	} %>
@@ -57,4 +58,17 @@
 	
 	
 </body>
+
+<script>
+	
+	async function agregarCarrito(idProducto){
+		console.log('agregarCarrito', idProducto);
+	
+		fetch('/galactus-store/carrito?idProducto='+idProducto, {
+			method: 'POST'
+		});
+	}
+
+</script>
+
 </html>
