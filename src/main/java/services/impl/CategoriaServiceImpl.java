@@ -18,7 +18,8 @@ public class CategoriaServiceImpl implements CategoriaService {
 			CategoriaMapper categoriaMapper = session.getMapper(CategoriaMapper.class);
 			return categoriaMapper.listarCategorias();
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("listarCategorias::"+e);
+			e.printStackTrace();
 			return null;
 		}
 	}

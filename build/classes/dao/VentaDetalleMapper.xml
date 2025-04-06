@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="dao.VentaDetalleMapper">
+ 
+ 	<resultMap id="VentaDetalleMap" type="models.VentaDetalle" >
+ 		<id column="id_venta_detalle" property="idVentaDetalle"/>
+ 		<result column="id_venta" property="idVenta"/>
+ 		<result column="id_producto" property="idProducto"/>
+ 		<result column="precio_unitario" property="precioUnitario"/>
+ 		<result column="cantidad" property="cantidad"/>
+ 		<result column="fecha_creacion" property="fechaCreacion"/>
+ 	</resultMap>
+ 
+ 	<select id="obtenerVentaDetallePorIdVentaYIdProducto" resultMap="VentaDetalleMap">
+ 		SELECT id_venta_detalle, id_venta, id_producto, precio_unitario, cantidad, fecha_creacion
+ 		FROM venta_detalles
+ 		WHERE estado_auditoria = '1' and id_venta = #{idVenta} and id_producto = #{idProducto}
+ 	</select>
+ 	
+ 	<insert id="insertarVentaDetalle" parameterType="models.VentaDetalle" useGeneratedKeys="true" keyProperty="idVentaDetalle">
+ 		INSERT INTO venta_detalles (id_venta, id_producto, precio_unitario)
+ 		VALUES (#{idVenta}, #{idProducto}, #{precioUnitario})
+ 	</insert>
+ 	
+ 	<update id="aumentarVentaDetalleCantidad" parameterType="Integer">
+ 		UPDATE venta_detalles
+ 		SET cantidad = cantidad + 1
+ 		WHERE id_venta_detalle = #{idVentaDetalle}
+ 	</update >
+ 	 	
+ 	
+ </mapper>

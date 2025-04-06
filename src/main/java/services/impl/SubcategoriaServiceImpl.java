@@ -18,7 +18,8 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
 			SubcategoriaMapper subcategoriaMapper = session.getMapper(SubcategoriaMapper.class);
 			return subcategoriaMapper.listarSubcategoriasPorIdCategoria(idCategoria);
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("listarSubcategoriasPorIdCategoria::"+e);
+			e.printStackTrace();
 			return null;
 		}
 	}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="dao.VentaMapper">
+ 
+ 	<resultMap id="VentaMap" type="models.Venta" >
+ 		<id column="id_venta" property="idVenta"/>
+ 		<result column="codigo_interno" property="codigoInterno"/>
+ 		<result column="codigo_boleta" property="codigoBoleta"/>
+ 		<result column="id_usuario_comprador" property="idUsuarioComprador"/>
+ 		<result column="id_usuario_vendedor" property="idUsuarioVendedor"/>
+ 		<result column="estado_venta" property="estadoVenta"/>
+ 		<result column="metodo_pago" property="metodoPago"/>
+ 		<result column="monto_total" property="montoTotal"/>
+ 		<result column="fecha_creacion" property="fechaCreacion"/>
+ 	</resultMap>
+ 
+ 	<select id="obtenerVentaPorCodigoInterno" parameterType="String" resultMap="VentaMap">
+ 		SELECT id_venta, codigo_interno, codigo_boleta, id_usuario_comprador, id_usuario_vendedor, estado_venta, metodo_pago, monto_total, fecha_creacion
+ 		FROM ventas
+ 		WHERE estado_auditoria = '1' and codigo_interno = #{codigoInterno}
+ 	</select>
+ 	
+ 	<insert id="insertarVenta" parameterType="models.Venta" useGeneratedKeys="true" keyProperty="idVenta">
+ 		INSERT INTO ventas (codigo_interno, codigo_boleta, id_usuario_comprador, id_usuario_vendedor, metodo_pago, monto_total)
+ 		VALUES (#{codigoInterno}, #{codigoBoleta}, #{idUsuarioComprador}, #{idUsuarioVendedor}, #{metodoPago}, #{montoTotal})
+ 	</insert>
+ 	
+ 
+ 	 	
+ 	
+ </mapper>

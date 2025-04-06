@@ -18,7 +18,8 @@ public class ProductoServiceImpl implements ProductoService {
 			ProductoMapper productoMapper = session.getMapper(ProductoMapper.class);
 			return productoMapper.listarProductosPorIdSubcategoria(idSubcategoria);
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("listarProductosPorIdSubcategoria::"+e);
+			e.printStackTrace();
 			return null;
 		}
 	}
